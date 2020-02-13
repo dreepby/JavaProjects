@@ -11,6 +11,7 @@ public class ExercicioUm {
 		System.out.println("Informe a quantidade de horas trabalhadas:");
 		int HorasTrabalhadas = teclado.nextInt();
 		System.out.printf("Você deve receber o valor de: R$ %.2f", ValorHora * HorasTrabalhadas);
+		//Importante usar cast para float
 		teclado.close();
 
 	}
