@@ -12,7 +12,7 @@ public class ExercicioTres {
 	  	System.out.println("Informe a quantidade de degraus:");
 	  	int QuantidadeDegrau = teclado.nextInt();
 	  	
-	  	System.out.printf("Altura de cada degrau: %f", (AlturaAndares * 100) /  QuantidadeDegrau);
+	  	System.out.printf("Altura de cada degrau: %.2f", (AlturaAndares * 100) /  QuantidadeDegrau);
 	  	teclado.close();
 	}
 	
