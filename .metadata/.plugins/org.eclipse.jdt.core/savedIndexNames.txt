@@ -1,3 +1,0 @@
-INDEX VERSION 1.131+C:\Users\dolby\Desktop\JavaProjects\.metadata\.plugins\org.eclipse.jdt.core
-4057819115.index
-1231093902.index
