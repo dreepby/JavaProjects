@@ -1,6 +1,7 @@
 package entidades;
 
 import java.util.Date;
+import java.text.DateFormat;
 import java.util.GregorianCalendar;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
@@ -105,6 +106,7 @@ public class Pessoa {
 	
 	@Override
 	public String toString() {
-		return "Pessoa [Nome=" + Nome + ", DataNascimento=" + DataNascimento + "]";
+		DateFormat df1 = DateFormat.getDateInstance(DateFormat.SHORT);
+		return "Pessoa [Nome=" + Nome + ", DataNascimento=" + df1.format(DataNascimento) + "]";
 	}
 }
