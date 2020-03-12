@@ -55,9 +55,10 @@ public class Pessoa {
 	
 	public Boolean DataValida(String AData) {
 		try {
-			GregorianCalendar gc = new GregorianCalendar();
 			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-	        gc.setTime(formatter.parse(AData));
+			formatter.setLenient(false);
+
+	        Date Teste = formatter.parse(AData);
 	        return true;
 	    } catch (ParseException e) {	  
 	    	return false;
@@ -77,7 +78,7 @@ public class Pessoa {
 	public Boolean DataDeNascimentoAnteriorADiaAtual() {				
 		int iReturn = CompararDataNascimento(new Date());
 		
-		if (iReturn < 0)
+		if (iReturn > 0)
 			return true;
 		else
 			return false;
@@ -86,7 +87,7 @@ public class Pessoa {
 	public Boolean JaFezAniversario() {
 		int iReturn = CompararDataNascimento(new Date());
 		
-		if (iReturn <= 0)
+		if (iReturn >= 0)
 			return true;
 		else
 			return false;

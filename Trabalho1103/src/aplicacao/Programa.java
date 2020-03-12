@@ -13,8 +13,8 @@ public class Programa {
         
         System.out.println("idade pessoa:" + oPessoa.GetIdadePessoa());
 		System.out.println("Data válida:" + oPessoa.DataValida("01/01/2000"));
-		System.out.println("Data inválida:" + oPessoa.DataValida("51/31/2000"));
-		System.out.println("Data nascimento anterior ao dia atual" + oPessoa.DataDeNascimentoAnteriorADiaAtual());
+		System.out.println("Data inválida:" + oPessoa.DataValida("51/31/22200"));
+		System.out.println("Data nascimento anterior ao dia atual(s): " + oPessoa.DataDeNascimentoAnteriorADiaAtual());
 		System.out.println("Ja fez aniversario: (s)" + oPessoa.JaFezAniversario());
 		
 		oPessoa.SetData("01/01/2030");
