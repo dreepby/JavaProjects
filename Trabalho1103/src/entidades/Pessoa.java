@@ -3,8 +3,6 @@ package entidades;
 import java.util.Date;
 import java.text.DateFormat;
 import java.util.GregorianCalendar;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
 import java.util.Calendar;
 import java.time.LocalDate;
 import java.time.Period;
@@ -13,7 +11,11 @@ public class Pessoa {
 	private String Nome;
 	private Date DataNascimento;
 	
-	
+	public Pessoa(String nome, Date dataNascimento) {
+		Nome = nome;
+		DataNascimento = dataNascimento;
+	}
+
 	public void setNome(String nome) {
 		Nome = nome;
 	}
@@ -26,82 +28,46 @@ public class Pessoa {
 		DataNascimento = dataNascimento;
 	}
 	
-	public void SetData(String AData) {
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		try {
-			this.DataNascimento = formatter.parse(AData);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	public Date getDataNascimento() {
 		return DataNascimento;
 	}
 	
-	public int GetIdadePessoa() {
+	private LocalDate GetLocalDate(Date ADate) {
 		Calendar calendar = new GregorianCalendar();
-		calendar.setTime(DataNascimento);
+		calendar.setTime(ADate);
 		
-		Calendar hoje = Calendar.getInstance();
-		
-		LocalDate ldDataNascimento = LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)+1, calendar.get(Calendar.DAY_OF_MONTH));
-		LocalDate ldDataAtual = LocalDate.of(hoje.get(Calendar.YEAR), hoje.get(Calendar.MONTH)+1, hoje.get(Calendar.DAY_OF_MONTH));
+		return LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)+1, calendar.get(Calendar.DAY_OF_MONTH));
+	}
+	
+	public int GetIdadePessoa() {
+		LocalDate ldDataNascimento = GetLocalDate(DataNascimento);
+		LocalDate ldDataAtual = GetLocalDate(new Date());
 		
 		Period periodo = Period.between(ldDataNascimento, ldDataAtual);
 		return periodo.getYears();
 	}
 	
-	
-	public Boolean DataValida(String AData) {
-		try {
-			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-			formatter.setLenient(false);
-
-	        Date Teste = formatter.parse(AData);
-	        return true;
-	    } catch (ParseException e) {	  
-	    	return false;
-	    }
-	}
-	
-	private int CompararDataNascimento(Date AData) {
-		Calendar cDataNascismento = new GregorianCalendar();
-		cDataNascismento.setTime(this.DataNascimento);
-		
-		Calendar cData = new GregorianCalendar();
-		cData.setTime(AData);
-		
-		return cData.compareTo(cDataNascismento);
-	}
-	
-	public Boolean DataDeNascimentoAnteriorADiaAtual() {				
-		int iReturn = CompararDataNascimento(new Date());
-		
-		if (iReturn > 0)
-			return true;
-		else
-			return false;
-	}
-	
 	public Boolean JaFezAniversario() {
-		int iReturn = CompararDataNascimento(new Date());
+		Calendar dataNasci = new GregorianCalendar();
+		dataNasci.setTime(this.DataNascimento);
 		
-		if (iReturn >= 0)
-			return true;
-		else
-			return false;
-			   
+		Calendar dataAtual = new GregorianCalendar();
+		dataAtual.setTime(new Date());
+		
+		return dataNasci.get(Calendar.MONTH) <= dataAtual.get(Calendar.MONTH) && dataNasci.get(Calendar.DAY_OF_MONTH) <= dataAtual.get(Calendar.DAY_OF_MONTH) 
+				&&  dataNasci.get(Calendar.YEAR) <= dataAtual.get(Calendar.YEAR); 		
 	}
+	
 	
 	public Boolean HojeEhAniversario() {
-		int iReturn = CompararDataNascimento(new Date());
+		Calendar dataNasci = new GregorianCalendar();
+		dataNasci.setTime(this.DataNascimento);
 		
-		if (iReturn == 0)
-			return true;
-		else
-			return false;
+		Calendar dataAtual = new GregorianCalendar();
+		dataAtual.setTime(new Date());
+		
+		return dataNasci.get(Calendar.MONTH) == dataAtual.get(Calendar.MONTH) && dataNasci.get(Calendar.DAY_OF_MONTH) == dataAtual.get(Calendar.DAY_OF_MONTH)
+				&&  dataNasci.get(Calendar.YEAR) <= dataAtual.get(Calendar.YEAR); 	
 	}
 	
 	@Override
