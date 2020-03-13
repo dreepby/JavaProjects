@@ -47,27 +47,25 @@ public class Pessoa {
 		return periodo.getYears();
 	}
 	
+	private LocalDate GetAniversario(LocalDate DataAtual) {
+		Calendar calendar = new GregorianCalendar();
+		calendar.setTime(this.DataNascimento);
+		return LocalDate.of(DataAtual.getYear(), calendar.get(Calendar.MONTH)+1, calendar.get(Calendar.DAY_OF_MONTH));
+	}
+	
 	public Boolean JaFezAniversario() {
-		Calendar dataNasci = new GregorianCalendar();
-		dataNasci.setTime(this.DataNascimento);
+		LocalDate ldDataAtual = GetLocalDate(new Date());
+		LocalDate ldAniversario = GetAniversario(ldDataAtual);	    
 		
-		Calendar dataAtual = new GregorianCalendar();
-		dataAtual.setTime(new Date());
-		
-		return dataNasci.get(Calendar.MONTH) <= dataAtual.get(Calendar.MONTH) && dataNasci.get(Calendar.DAY_OF_MONTH) <= dataAtual.get(Calendar.DAY_OF_MONTH) 
-				&&  dataNasci.get(Calendar.YEAR) <= dataAtual.get(Calendar.YEAR); 		
+		return ldAniversario.isBefore(ldDataAtual) || ldAniversario.isEqual(ldDataAtual); 		
 	}
 	
 	
 	public Boolean HojeEhAniversario() {
-		Calendar dataNasci = new GregorianCalendar();
-		dataNasci.setTime(this.DataNascimento);
+		LocalDate ldDataAtual = GetLocalDate(new Date());
+		LocalDate ldAniversario = GetAniversario(ldDataAtual);	    
 		
-		Calendar dataAtual = new GregorianCalendar();
-		dataAtual.setTime(new Date());
-		
-		return dataNasci.get(Calendar.MONTH) == dataAtual.get(Calendar.MONTH) && dataNasci.get(Calendar.DAY_OF_MONTH) == dataAtual.get(Calendar.DAY_OF_MONTH)
-				&&  dataNasci.get(Calendar.YEAR) <= dataAtual.get(Calendar.YEAR); 	
+		return ldAniversario.isEqual(ldDataAtual); 		
 	}
 	
 	@Override
