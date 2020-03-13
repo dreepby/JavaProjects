@@ -32,7 +32,7 @@ public class Pessoa {
 		return DataNascimento;
 	}
 	
-	private LocalDate GetLocalDate(Date ADate) {
+	public static LocalDate GetLocalDate(Date ADate) {
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(ADate);
 		

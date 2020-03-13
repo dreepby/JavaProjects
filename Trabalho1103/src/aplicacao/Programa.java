@@ -53,16 +53,9 @@ public class Programa {
 		}
 	}
 	
-	private static LocalDate GetLocalDate(Date ADate) {
-		Calendar calendar = new GregorianCalendar();
-		calendar.setTime(ADate);
-		
-		return LocalDate.of(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH)+1, calendar.get(Calendar.DAY_OF_MONTH));
-	}
-	
 	public static Boolean DataDeNascimentoAnteriorADiaAtual(Date AData) {
-		LocalDate ldDataNascimento = GetLocalDate(AData);
-		LocalDate ldDataAtual = GetLocalDate(new Date());
+		LocalDate ldDataNascimento = Pessoa.GetLocalDate(AData);
+		LocalDate ldDataAtual = Pessoa.GetLocalDate(new Date());
 		
 		return ldDataNascimento.isBefore(ldDataAtual);
 	}
