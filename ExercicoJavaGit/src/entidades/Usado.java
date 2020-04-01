@@ -3,26 +3,24 @@ import entidades.Situacao;
 
 public final class Usado extends Imovel {
 
-	private Situacao sit;
+	private Situacao situacao;
 
-	public Usado(String nome, String endereco, double area, double valor, Situacao sit) {
-		super(nome, endereco, area, valor);
-		this.sit = sit;
+	public Usado(String ANome, String AEndereco, double AArea, double AValor, Situacao ASituacao) {
+		super(ANome, AEndereco, AArea, AValor);
+		this.situacao = ASituacao;
 	}
 
 	public Situacao getSituacao() {
-		return sit;
+		return situacao;
 	}
 	
 	public void setSituacao(Situacao sit) {
-		this.sit = sit;
+		this.situacao = sit;
 	}
 	
 	   @Override
 	    public double mostrarValorVenda() {
-	        double ValorNovo;
-	        ValorNovo = valor * 1.1;
-	        return ValorNovo;
+	        return Valor - (Valor * 1.1);
 	    }
 
 	
